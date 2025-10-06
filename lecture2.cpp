@@ -50,6 +50,98 @@ Destructors: a function that frees all the resources that an object allocates du
     2. C++ destructs all non-primitive member variables in the reverse order they appear in the class
     3. Learn about this later
       After the destructors have run, the object's RAM is freed
-    If we don't define a destructor, C++ provides a hidden, empty one, going through the same destruction phases we learned a second ago
-    [stopped at slide 28]
+  If we don't define a destructor, C++ provides a hidden, empty one, going through the same destruction phases we learned a second ago
 */
+#include <iostream>
+using namespace std;
+
+struct A {
+    A() { cout << "A constructed\n"; }
+    ~A() { cout << "A destroyed\n"; }
+};
+
+struct B {
+    B() { cout << "B constructed\n"; }
+    ~B() { cout << "B destroyed\n"; }
+};
+
+struct C {
+    A a;
+    B b;
+    C() { cout << "C constructed\n"; }
+    ~C() { cout << "C destroyed\n"; }
+};
+
+int main() {
+    C c;
+}
+
+A constructed
+B constructed
+C constructed
+C destroyed
+B destroyed
+A destroyed
+/*
+Why does C++ destruct a class's member variables after the class's destructor runs?
+  Once the outer destructor has finished, then the members can be safely destructed
+  When you destroy an object: 
+    1. Your class's destructor function body runs first
+    2. Then, C++ automatically calls destructors for all member (primitive ones just cease to exist, we refer to non-primitive non members in particular for this) variables, in reverse order of construction
+Constructor vs Destruction Order
+  (see above example) 
+Summary of Destructors
+  Two Rules
+    1. local variables are destructed when their lifetime ends
+    2. dynamically-allocated objects are destructed only if/when delete is used on them
+  Destructors free all the resources that an object allocates during its lifetime
+  Body first, then non-primitive member variable destruction in reverse order and destructs like that
+  Rules follow for class composition
+  Object's lifetime ends when...
+    1. we exit a {block} where a local variable was defined
+    2. we delete an object through a pointer
+      But if you forget to delete an object, it'll never be destructed!
+*/
+
+// Pointer Review for next lecture
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Case 1: Pointer to existing variable (stack)
+    int a = 10;
+    int* p1 = &a;
+    cout << "p1 points to stack variable: " << *p1 << endl;
+    // delete p1; ❌ DON'T delete! 'a' will be freed automatically.
+
+    // Case 2: Dynamically allocated variable (heap)
+    int* p2 = new int(20);
+    cout << "p2 points to heap variable: " << *p2 << endl;
+    delete p2; // ✅ Free heap memory
+
+    // Case 3: Memory leak — forgot to delete
+    int* p3 = new int(30);
+    cout << "p3 allocated but never deleted: " << *p3 << endl;
+    // ❌ Memory leak here if we don't call delete p3;
+
+    // Case 4: Null pointer
+    int* p4 = nullptr;
+    if (p4 == nullptr)
+        cout << "p4 is a null pointer.\n";
+
+    // Case 5: Assigning after allocation
+    p4 = new int(40);
+    cout << "p4 now points to heap variable: " << *p4 << endl;
+    delete p4; // ✅ delete what you new
+
+    // Case 6: Dangling pointer (dangerous)
+    int* p5 = new int(50);
+    delete p5; // memory freed
+    // *p5 = 60; ❌ Undefined behavior! Memory no longer valid.
+    p5 = nullptr; // ✅ reset to null to avoid using freed memory
+
+    cout << "Program ending safely.\n";
+    return 0;
+}
+
