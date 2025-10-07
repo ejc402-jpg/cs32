@@ -1,4 +1,23 @@
 /*
+Pointers: enable dynamic memory allocation, complex data structures, and argument passing
+  & operator tells us where a variable is located in RAM - its address
+    an address is NOT a variable, it is the location of a variable which takes up no storage
+  * operator dereferences takes the address of the variable it points at and retrieves the value stored at that location of memory
+    int* ptr = &num;
+    OR
+    int* ptr;
+    ptr = &num;
+    CANNOT DO THIS...
+      int* ptr = num (null pointer exception)
+      cout << *ptr;
+        if you don't initialize a pointer variable then it holds a random address
+      OR
+      int* ptr;
+      *ptr = &num;
+Debugging
+  try it?
+  can speed up the programming process
+Include Etiquette
 Arrays, Addresses and Pointers
   declaring and initialization an array, couting the array variable name outputs the address to the first element stored
   no need for & operator to get an array's address
