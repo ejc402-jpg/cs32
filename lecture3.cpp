@@ -38,9 +38,11 @@ void printInfo(Circ* ptr){
 
 int main(){
   Circ foo(3, 4, 10);
-  printInfo(&foo)
-    ;
+  printInfo(&foo);
 }
+/*
+
+*/
 
 
 
