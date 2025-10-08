@@ -14,10 +14,16 @@ Pointers: enable dynamic memory allocation, complex data structures, and argumen
       OR
       int* ptr;
       *ptr = &num;
+Pointers vs References
+  when you pass a variable by refernce to a function, what really happens? 
+  in fact, a reference is just a simpler notation for passing by a pointer!
+    under the hood, C++ uses a pointer to match the address
 Debugging
   try it?
   can speed up the programming process
 Include Etiquette
+  never include cpp or h files in h files, or cpp files in other cpp files
+  only include h files in cpp files
 Arrays, Addresses and Pointers
   declaring and initialization an array, couting the array variable name outputs the address to the first element stored
   no need for & operator to get an array's address
