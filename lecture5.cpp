@@ -237,6 +237,8 @@ Queues
         to dequeue the head item, fetch arr[head] and increment head and decrement count
         if the head or tail go past the end of the array, set it back to 0
           but requires knowledge of max queue size beforehand? 
-    also implemented in the STL library of C++ 
-        
+            no! when head or tail pointers go out of the array, they are reset to 0
+            subsequent elements physically look like they are in front but are later in the queue
+              but queue cannot hold more elements than the size it was allocated (this is the drawback)
+    also implemented in the STL library of C++  
 */
