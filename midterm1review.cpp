@@ -162,11 +162,138 @@ bool LinkedList::findNthFromLast(int N, int &value){
     ptr = ptr->next;
   }
   if(N > M) return false;
-  for(i = 1, ptr = head; i < (M-N+1); i++){
+  for(i = 1, ptr = head; i < (M-N+1); i++){ // move forward (M-N) steps to get N-th to last element
     ptr = ptr->next;
   }
   value = ptr->num;
   return true;
 }
 
-STOPPED AT PAGE 32
+// Problem #2 Please complete the missing blocks of codes below to make the program generate the following output
+/*
+1 + 2i
+6 + 7i
+6 + 7i
+6 + 7i
+*/
+#include <iostream>
+using namespace std;
+class Complex{
+private:
+  double r, i;
+public:
+  Complex() : r(0), i(0) {}
+  Complex(int c_r, int c_i) : r(c_r), i(c_i) {}
+  void output(){
+    cout << r << "+" << i << "i" << endl;
+  }
+  Complex& operator=(const Complex& other){ // this was unnecessary however
+    r = other.r; // no dynamically allocated memory, so compiler-generated copy is safe
+    i = other.i;
+  }
+};
+int main(){
+  Complex a, b;
+  a = Complex(1, 2); a.output();
+  b = Complex (6, 7); b.output();
+  a = b;
+  a.output();
+  b.output();
+  return 0;
+}
+
+// Problem 3 - The implementation below will crash because it's missing a copy constructor and an assignment operator
+// currently, Class Triangle dynamically allocated of Points 
+// default copy causes shallow copy --> multiple deletes on the same pointer
+// must define copy constructro and assignment operator for deep copy
+// rule of three
+#include <iostream>
+using namespace std;
+class Triangle {
+public:
+  Triangle() {
+    p = new Point[3];
+  }
+  Triangle(int x1,int y1,int x2, int y2,int x3,int y3) {
+    p = new Point[3];
+    p[0].x = x1; p[0].y = y1;
+    p[1].x = x2; p[1].y = y2;
+    p[2].x = x3; p[2].y = y3;
+  }
+  Triangle(const Triangle& other){
+    p = new Point[3];
+    p[0].x = other[0].x; p[0].y = other[0].y;
+    p[1].x = other[1].x; p[1].y = other[1].y;
+    p[2].x = other[2].x; p[2].y = other[2].y;
+  }
+Triangle& operator=(const Triangle& other){
+  if(&other = this) return *this;
+  delete[] p;
+  p = new Point[3];
+  p[0].x = other[0].x; p[0].y = other[0].y;
+  p[1].x = other[1].x; p[1].y = other[1].y;
+  p[2].x = other[2].x; p[2].y = other[2].y;
+  return *this;
+}
+  Triangle::~Triangle() { delete [] p; }
+private:
+  struct Point {
+    int x,y;
+    Point(int px=0,int py=0): x(px), y(py) { }
+  };
+  Point *p;
+};
+int main() {
+  Triangle *array[3]; // dynamically allocated array of three triangles (each triangle points to a point)
+  array[0] = new Triangle(1,1,1,3,3,1);
+  array[1] = new Triangle(2,2,2,6,6,2);
+  array[2] = new Triangle(3,3,3,9,9,3);
+  Triangle c2 = *array[0];
+  c2 = *array[1];
+  for(int i=0;i<3;i++) delete array[i];
+}
+
+/*
+Rule of Three Summary
+  if a class manages dynamic memory, you must define all three
+    1. destructor - free allocated memory
+      delete pointers within array first or just delete the array or whatever pointers
+    2. copy constructor - deep copy during creation
+    3. assignment operator - deep copy during assignment
+      delete pointers within array first or just delete the array or whatever pointers
+      check if (&src = this) and return *this at the end 
+*/
+
+// Pointer Arithmetic Review
+
+#include <iostream> 
+using namespace std;
+int main(){
+  int nums[] = {10, 20, 30, 40, 50};
+  int *p = nums;
+
+  std::cout << *(p+2) << endl;
+  std::cout << *p + 2 << endl;
+  std::cout << *(nums+4) - *(p+1) << endl;
+
+  return 0;
+}
+
+// 30 12 30
+
+#include <iostream> 
+using namespace std;
+
+int main(){
+  int arr[5] = {5, 10, 15, 20, 25};
+  // supposed address respectively are 1000, 1004, 1008, 1012, 1016
+  int *p = arr;
+  int *q = p + 3;
+
+  std::cout << (q-p) << endl;
+  std::cout << (p+2) << endl;
+  std::cout << *(q-1) << endl;
+}
+
+// 3, 1008, 15
+// pointer minus pointer gives number of elements between them, not byte difference
