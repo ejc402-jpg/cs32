@@ -1,3 +1,52 @@
+// Linked Lists, Stack, Queue, Postfix, Inheritance, BFS/DFS
+
+/*
+Linked List Operations
+  insert
+  delete 
+  reverse
+Stack
+  FILO
+    DFS
+      push an object to the stack
+      while stack is not empty:
+        pop top of stack, if top is target, then return
+        if neighbours are not visited push them to the top of the stack
+    Postfix Evaluation
+  methods
+    push 
+    pop (does not return but removes top item)
+  the stack is just an ADT (can be implemented in many ways)
+Queue
+  FIFO
+    BFS
+      push an object to queue
+      while queue is not empty:
+        pop head of queue
+        if head is target, return
+        if not, push unvisited neighbors to the back of the queue
+  methods
+    push
+    pop (does not return)
+  the queue is also just an ADT (can be implemented in many ways) 
+Inheritance (base class and derived classes) 
+  why? 
+    better OOP 
+    common interface
+    common fields
+  public inheritance
+    public members of the base class remain public in the derived class
+    protected members remain protected in the derived class (accessible within the derived class and its own derived classes)
+    private members of the base class are not directly accessible in the derived class
+  protected inheritance
+    public member of the base class become protected in the derived class
+    protected members remain protected
+    private members still not directly accessible in the derived class
+  private inheritance
+    public and protected members of the base class are private in the derived class
+    private memebers of base class still not directly accessible in the derived class
+*/
+
 // Worksheet 
 
 /*
