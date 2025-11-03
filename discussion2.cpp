@@ -1,4 +1,37 @@
-// Notes go when slides are posted
+// Pointer, Dynamic Memory, Constructor, Destructor, Shallow vs. Deep Copy, Assignment Operator, Copy Constructor
+
+/*
+Pointer
+  an address is not a variable but a number that identifies the starting location for another variable in RAM
+  using & operator
+  has a type of the variable it's pointing to
+  * operator dereferences the address and retrieves the value
+  always initialize to nullptr before assignment (NEVER dereference nullptr)
+Classes and Pointer
+  this is a pointer that points to the current object instance of the class
+Dynamic Memory
+  remember: when you call delete or delete[], it only destroys the object the pointer points to, not the object itself (can reuse the pointer after delete or assign nullptr for good practice)
+Constructor
+  constructs non-primitive member variables first, then the constructor body
+  primitive variables are not constructed, just assigned memory (char, int, short, long, float, double, bool)
+  use initializer list to construct member variables that require parameters to build
+  constructor overloading: you can have multiple constructors for the same class
+Destructor
+  frees all resources that an object dynamically allocates during its lifetime
+  destructor body first, then reverse order member variables
+Shallow Copy vs Deep Copy
+  deep copy is needed when memory is dynamically allocated to prevent double deletes
+Copy Constructor
+  1. determine what resources are being used by the source object
+  2. allocate matching set of resources
+  3. copy contents of the source object to the target object (new if needed) --> functionally identical but independent
+Assignment Operator
+  1. check for aliasing
+  2. determine what resources
+  3. allocate matching set
+  4. deep copy
+  5. return *this, a reference to the target object
+*/
 
 Use initializer lists for all objects, consts, and references.
 Use constructor body mainly for logic that can’t be done in the initializer list.
