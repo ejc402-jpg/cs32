@@ -23,6 +23,7 @@ If an internal method in a class is trying to return an internal struct (or a po
     - Assuming your internal structure is called “blah”, update your external function bar definitions as follows:
     - blah foo::bar(…) { … } 🡪 template<typename ItemType>typename foo<ItemType>::blah foo<ItemType>::bar(…) { … }
     - blah *foo::bar(…) { … } 🡪 template<typename ItemType>typename foo<ItemType>::blah *foo<ItemType>::bar(…) { … }
+
 Try to pass templated items by const reference if you can (to improve performance):
   - Bad: template <typename ItemType> void foo(ItemType x)
   - Good: template <typename ItemType> void foo(const ItemType &x)
