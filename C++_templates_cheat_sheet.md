@@ -1,6 +1,7 @@
 To templatize a non-class function called bar:  
   - Update the function header: int bar(int a)  🡪  template <typename ItemType> ItemType bar(ItemType a);
   - Replace appropriate types in the function to the new ItemType:  {  int a; float b; … } 🡪   {ItemType a; float b; …}
+
 To templatize a class called foo:
   - Put this in front of the class declaration: class foo { … };  🡪 template <typename ItemType> class foo { … };
   - Update appropriate types in the class to the new ItemType
