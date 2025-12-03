@@ -225,7 +225,7 @@ bool operator==(const Point &a, const Point &b)
 struct PointFunctor {   
   size_t operator()(const Point &p) const { // size_t is unsigned int
     string s = to_string(p.x) + "," + to_string(p.y);
-    return std::hash<string>()(s);    
+    return std::hash<string>{}(s);    
   }
 };
 int main() {
