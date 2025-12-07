@@ -162,7 +162,7 @@ The Efficient (Official) Heapsort
         we can!
     update the shuffling algorithm slightly
     for(curNode = lastNode through rootNode){
-      a. focus on the startNode of curNode
+      a. focus on the startNode of curNode (skip all leaves)
         startNode = N/2 - 1
       b. think of this subtree as a maxheap
       c. keep shifting the top value down until your subtree becomes a valid maxheap
